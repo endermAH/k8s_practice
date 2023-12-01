@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: backend-rs
+  labels:
+    app: nginx
+    tier: backend
+spec:
+  # replicas count
+  replicas: 3
+
+  # selector
+  selector:
+    matchLabels:
+      tier: backend
+
+  # pod template
+  template:
+    metadata:
+      labels:
+        tier: backend
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+          - containerPort: 80
